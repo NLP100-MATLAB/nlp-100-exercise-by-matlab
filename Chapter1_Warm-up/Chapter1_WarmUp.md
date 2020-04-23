@@ -126,14 +126,14 @@ ans = 'パタトクカシーー'
 
 
 
-ここも string 型でやってみます。
+ここも string 型でやってみます。スペースとコンマで分解します。
 
 
 
 ```matlab:Code
-str = "Now I need a drink, alcoholic of course, after ..." + ...
+str = "Now I need a drink, alcoholic of course, after " + ...
     "the heavy lectures involving quantum mechanics";
-str = split(str)
+str = strsplit(str,{' ',','})'
 ```
 
 
@@ -143,12 +143,12 @@ str = 15x1 string
 "I"            
 "need"         
 "a"            
-"drink,"       
+"drink"        
 "alcoholic"    
 "of"           
-"course,"      
+"course"       
 "after"        
-"...the"       
+"the"          
 
 ```
 
@@ -165,7 +165,7 @@ numchars = strlength(str)'
 
 ```text:Output
 numchars = 1x15    
-     3     1     4     1     6     9     2     7     5     6     5     8     9     7     9
+     3     1     4     1     5     9     2     6     5     3     5     8     9     7     9
 
 ```
 
@@ -181,7 +181,7 @@ join(string(numchars),"")
 
 
 ```text:Output
-ans = "314169275658979"
+ans = "314159265358979"
 ```
 
 # 04. 元素記号
@@ -190,14 +190,30 @@ ans = "314169275658979"
 
 
 
-まずは string 型です。
+先頭の１文字、２文字を取り出すとなると char 型の方がやり易そう。`strsplit` 関数は同じように使えます。
 
 
 
 ```matlab:Code
-str = "Hi He Lied Because Boron Could Not Oxidize Fluorine " + ...
-    "New Nations Might Also Sign Peace Security Clause. Arthur King Can";
-str = split(str);
+str = ['Hi He Lied Because Boron Could Not Oxidize Fluorine '  ...
+    'New Nations Might Also Sign Peace Security Clause. Arthur King Can'];
+str = strsplit(str)'
+```
+
+
+```text:Output
+str = 20x1 cell    
+'Hi'          
+'He'          
+'Lied'        
+'Because'     
+'Boron'       
+'Could'       
+'Not'         
+'Oxidize'     
+'Fluorine'    
+'New'         
+
 ```
 
 
@@ -207,22 +223,73 @@ str = split(str);
 
 
 
-先頭の１文字、２文字を取り出すとなると char 型の方がやり易そう。正規表現でもいけるかな？
+先頭の１文字、２文字を取り出します。for ループで回してもいいですが、せっかくなので `cellfun` を使います。 
 
 
 
 ```matlab:Code
-idx1 = [1,5,6,7,8,9,15,16]';
-idx2 = true(length(str),1); idx2(idx1) = false; idx2 = find(idx2);
-% this is equivalent to
+idx1 = [1,5,6,7,8,9,15,16]'; % 1 文字を取り出す index
+idx2 = true(length(str),1); idx2(idx1) = false; idx2 = find(idx2); % 2 文字を取り出す index
+% これは以下と同じ・・
 % idx2 = [2,3,4,10,11,12,13,14,17,18,19,20];
+
+matchStr1 = cellfun(@(x) x(1), str(idx1), "UniformOutput", false)
+```
+
+
+```text:Output
+matchStr1 = 8x1 cell    
+'H'          
+'B'          
+'C'          
+'N'          
+'O'          
+'F'          
+'P'          
+'S'          
+
+```
+
+
+```matlab:Code
+matchStr2 = cellfun(@(x) x(1:2), str(idx2), "UniformOutput", false)
+```
+
+
+```text:Output
+matchStr2 = 12x1 cell    
+'He'         
+'Li'         
+'Be'         
+'Ne'         
+'Na'         
+'Mi'         
+'Al'         
+'Si'         
+'Cl'         
+'Ar'         
+
+```
+
+
+
+`matchStr1`、`matchStr2` ともにセル配列になっている点は要注意。 
+
+
+
+
+少しかっこつけて正規表現を使うなら・・
+
+
+
+```matlab:Code(Display)
 matchStr1 = regexp(str(idx1),'([a-zA-Z]{1}).*','tokens'); % 最初の1文字
 matchStr2 = regexp(str(idx2),'([a-zA-Z]{2}).*','tokens'); % 最初の2文字
 ```
 
 
 
-`matchStr1`、`matchStr2` ともにセル配列になっているので要注意。 
+こんな感じ。
 
 
 
@@ -240,7 +307,9 @@ M('Be')
 
 
 ```text:Output
-ans = 4
+ans = 
+     4
+
 ```
 
 
@@ -287,7 +356,7 @@ sortrows(t,'valueSet') % 出現順にソート
 
 
 ```matlab:Code
-if license('checkout','Text_Analytics_Toolbox')
+if license('checkout','Text_Analytics_Toolbox') % Toolbox が使える場合実行されます。
     doc = tokenizedDocument("I am an NLPer"); % トークン化
     bag = bagOfNgrams(doc,'NgramLengths',2);
     bag.Ngrams
@@ -305,7 +374,13 @@ ans = 3x2 string
 
 
 
-文字 bi-gram 作ってみます。こんな関数を作ってみました。char ベクトルを入れたら、文字 n-gram を作って string 型配列で返す。文字数が少ないとそのまま返します。
+`tokenizedDocument` を使わなくても単語単位で下と同じ処理をすればできますね。
+
+
+  
+
+
+次は文字 bi-gram 作ってみます。こんな関数を作ってみました。char ベクトルを入れたら、文字 n-gram を作って string 型配列で返す。文字数が少ないとそのまま返します。
 
 
 
@@ -350,7 +425,7 @@ cellfun(@(x) n_gram(x,2), str, 'UniformOutput', false)
 
 
 
-4 つ目だけ見難いですが、
+4 つ目だけ見難いですが、中身をみると
 
 
 
@@ -412,7 +487,12 @@ Y = 7x1 string
 
 
 
-bi-gram 取れていますね。集合演算は [https://jp.mathworks.com/help/matlab/set-operations.html](https://jp.mathworks.com/help/matlab/set-operations.html) に詳細がありますが、和集合（`union`）、積集合（`intersect`）そして差集合（`setdiff`）を使います。
+bi-gram 取れていますね。
+
+
+
+
+集合演算は [https://jp.mathworks.com/help/matlab/set-operations.html](https://jp.mathworks.com/help/matlab/set-operations.html) に詳細がありますが、和集合（`union`）、積集合（`intersect`）そして差集合（`setdiff`）を使います。
 
 
 
@@ -475,7 +555,7 @@ ans =
 
 
 
- 'se' は存在していますね。
+ 'se' は存在しています。
 
 
 # 07. テンプレートによる文生成
@@ -519,7 +599,12 @@ ans = "12時の気温は22.4"
 
 
 
-まずは char 型から始めてみます。`isstrprop` で小文字がどこにあるかを調べられるので使ってみます。
+まずは char 型から始めてみます。
+
+
+
+
+`isstrprop` で小文字がどこにあるかを調べられるので使ってみます。
 
 
 
@@ -621,7 +706,7 @@ str = 'We are the borg. Resistance is futile.'
 ```matlab:Code
 sentence = ['I couldn''t believe that I could actually understand ' ...
     'what I was reading : the phenomenal power of the human mind.'];
-words = split(sentence) % 各単語が１つずつセルに入ります。
+words = strsplit(sentence)' % 各単語が１つずつセルに入ります。
 ```
 
 
@@ -686,7 +771,7 @@ join(tmp) % 単語をつなぐ。
 
 ```text:Output
 ans = 
-    {'I cdulon't beileve that I cluod atluacly utnsnraded what I was redinag : the pnahneomel pewor of the hmuan midn.'}
+    {'I coldun't bevelie that I colud alcaulty usntarnded what I was reading : the paeoenhnml power of the huamn mndi.'}
 
 ```
 
