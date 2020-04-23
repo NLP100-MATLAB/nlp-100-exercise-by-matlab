@@ -11,7 +11,7 @@ https://nlp100.github.io/ja/ で公開されている言語処理100本ノック
 
 # Contributors 募集中
 
-興味ありましたらぜひ一緒にやりましょう。作業の重複を避けるために README.md を編集してご自身のアカウント名を記載して PR ください。
+興味ありましたらぜひ一緒にやりましょう。作業の重複を避けるために、まず README.md を編集してご自身のアカウント名を記載して PR ください。
 
 |  Capter  |  owner  | status |
 | ---- | ---- | ---- |
@@ -26,4 +26,5 @@ https://nlp100.github.io/ja/ で公開されている言語処理100本ノック
 | 第9章: RNN,CNN　| TBD | |
 | 第10章: 機械翻訳　| TBD | |
 
-In progress になっているけどやりたいという方もどうぞご連絡ください。こうしたら共同作業しやすいなど運用上のコメントもお待ちしております。
+- In progress になっているけどやりたいという方もどうぞ issue にてご連絡ください。こうしたら共同作業しやすいなど運用上のコメントもお待ちしております。
+- ブラウザ上でも読みやすいように markdown ファイルも置いていますが、これは[livescript2markdown​: MATLAB's live scripts to markdown](https://jp.mathworks.com/matlabcentral/fileexchange/73993-livescript2markdown-matlab-s-live-scripts-to-markdown) を使って自動変換しています。
