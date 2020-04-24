@@ -4,7 +4,7 @@ https://nlp100.github.io/ja/ で公開されている言語処理100本ノック
 
 >　言語処理100本ノックは，実用的でワクワクするような課題に取り組みながら，プログラミング，データ分析，研究のスキルを楽しく習得することを目指した問題集です
 
-ということで、こちらを MATLAB で取り組んでみようというレポジトリです。
+ということで、MATLAB で取り組んでみようというレポジトリです。
 
 同じ課題を実現する方法は沢山ある思います。もしもっといい（効率がいい、面白い）方法があれば是非コメントください。
 
@@ -26,5 +26,5 @@ https://nlp100.github.io/ja/ で公開されている言語処理100本ノック
 | 第9章: RNN,CNN　| TBD | |
 | 第10章: 機械翻訳　| TBD | |
 
-- In progress になっているけどやりたいという方もどうぞ issue にてご連絡ください。こうしたら共同作業しやすいなど運用上のコメントもお待ちしております。
+- In progress になっているけどやりたいという方もどうぞ issue にてご連絡ください。こうしたら共同作業しやすいなど運用上の提案コメントもお待ちしております。
 - ブラウザ上でも読みやすいように markdown ファイルも置いていますが、これは[livescript2markdown​: MATLAB's live scripts to markdown](https://jp.mathworks.com/matlabcentral/fileexchange/73993-livescript2markdown-matlab-s-live-scripts-to-markdown) を使って自動変換しています。
