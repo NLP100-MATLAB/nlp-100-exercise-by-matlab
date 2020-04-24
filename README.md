@@ -13,9 +13,10 @@ https://nlp100.github.io/ja/ で公開されている言語処理100本ノック
 
 興味ありましたらぜひ一緒にやりましょう。作業の重複を避けるために、まず README.md を編集してご自身のアカウント名を記載して PR ください。
 
+
 |  Capter  |  owner  | status |
 | ---- | ---- | ---- |
-| [第1章: 準備運動](Chapter1_WarmUp/Chapter1_WarmUp.md)　| minoue-xx | done |
+| [第1章: 準備運動](Chapter1_Warm-Up/Chapter1_WarmUp.md)　| minoue-xx | done |
 | 第2章: UNIXコマンド　| TBD |  |
 | 第3章: 正規表現　| TBD | |
 | 第4章: 形態素解析　| hyoshino | in progress |
