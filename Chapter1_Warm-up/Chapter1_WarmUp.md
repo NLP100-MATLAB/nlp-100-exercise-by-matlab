@@ -705,13 +705,13 @@ str = 'We are the borg. Resistance is futile.'
 
 ```matlab:Code
 sentence = ['I couldn''t believe that I could actually understand ' ...
-    'what I was reading : the phenomenal power of the human mind.'];
+    'what I was reading : the phenomenal power of the human mind .'];
 words = strsplit(sentence)' % 各単語が１つずつセルに入ります。
 ```
 
 
 ```text:Output
-words = 20x1 cell    
+words = 21x1 cell    
 'I'             
 'couldn't'      
 'believe'       
@@ -771,7 +771,7 @@ join(tmp) % 単語をつなぐ。
 
 ```text:Output
 ans = 
-    {'I coldun't bevelie that I colud alcaulty usntarnded what I was reading : the paeoenhnml power of the huamn mndi.'}
+    {'I cd'onlut beelive that I colud alacutly udntanesrd what I was ranideg : the pohenenaml power of the human mind .'}
 
 ```
 
