@@ -20,7 +20,7 @@ https://nlp100.github.io/ja/ で公開されている言語処理100本ノック
 | 第2章: UNIXコマンド　| TBD |  |
 | 第3章: 正規表現　| TBD | |
 | 第4章: 形態素解析　| hyoshino | in progress |
-| 第5章: 係り受け解析　| TBD | |
+| 第5章: 係り受け解析　| misataguchi | in progress |
 | 第6章: 機械学習　| TBD | |
 | 第7章: 単語ベクトル　| misataguchi | done |
 | 第8章: ニューラルネット　| TBD | |
