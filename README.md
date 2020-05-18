@@ -16,13 +16,13 @@ https://nlp100.github.io/ja/ で公開されている言語処理100本ノック
 
 |  Capter  |  owner  | status |
 | ---- | ---- | ---- |
-| [第1章: 準備運動](Chapter1_Warm-up/Chapter1_WarmUp.md)　| minoue-xx | done |
-| [第2章: UNIXコマンド](Chapter2_UnixCommand/Chapter2_UnixCommand.md)　| minoue-xx | done |
-| 第3章: 正規表現　| minoue-xx | in progress |
+| [第1章: 準備運動](Chapter1_Warm-up/Chapter1_WarmUp.md)　| minoue-xx | completed |
+| [第2章: UNIXコマンド](Chapter2_UnixCommand/Chapter2_UnixCommand.md)　| minoue-xx | completed |
+| 第3章: 正規表現　| minoue-xx | completed |
 | 第4章: 形態素解析　| hyoshino | in progress |
 | 第5章: 係り受け解析　| misataguchi | in progress |
 | 第6章: 機械学習　| TBD | |
-| [第7章: 単語ベクトル](Chapter7_Wordembedding/Chapter7.md)　| misataguchi | done |
+| [第7章: 単語ベクトル](Chapter7_Wordembedding/Chapter7.md)　| misataguchi | completed |
 | 第8章: ニューラルネット　| TBD | |
 | 第9章: RNN,CNN　| TBD | |
 | 第10章: 機械翻訳　| TBD | |
