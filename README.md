@@ -18,7 +18,7 @@ https://nlp100.github.io/ja/ で公開されている言語処理100本ノック
 | ---- | ---- | ---- |
 | [第1章: 準備運動](Chapter1_Warm-up/Chapter1_WarmUp.md)　| minoue-xx | completed |
 | [第2章: UNIXコマンド](Chapter2_UnixCommand/Chapter2_UnixCommand.md)　| minoue-xx | completed |
-| 第3章: 正規表現　| minoue-xx | completed |
+| [第3章: 正規表現](Chapter3_RegularExpression/Chapter3_RegularExpression.md)　| minoue-xx | completed |
 | 第4章: 形態素解析　| hyoshino | in progress |
 | 第5章: 係り受け解析　| misataguchi | in progress |
 | 第6章: 機械学習　| TBD | |
