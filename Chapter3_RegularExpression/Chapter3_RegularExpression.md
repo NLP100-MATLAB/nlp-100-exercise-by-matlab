@@ -143,7 +143,14 @@ head(T)
 
 | |title|text|
 |:--:|:--:|:--:|
-|1|"エジプト"|"{{otheruses|主に現代のエジプト・アラブ共和国|古代|古代エジプト\|
+|1|"エジプト"|"{{otheruses\|主に現代の...|
+|2|"オーストリア"|"{{基礎情報 国<br>\|略名 = オー...|
+|3|"インドネシア"|"{{基礎情報 国<br>\| 略名 =イン...|
+|4|"イラク"|"{{複数の問題<br>\| 参照方法 = ...|
+|5|"イラン"|"{{半保護}}<br>{{未検証...|
+|6|"チュニジア"|"{{基礎情報 国<br>\| 略名 = チ...|
+|7|"トルコ"|"{{Otheruses}}<br>\...|
+|8|"ロシア"|"{{Otheruses\|'''[[...|
 
 
 
@@ -163,7 +170,7 @@ UKWiki = T(T.title == "イギリス",:)
 
 | |title|text|
 |:--:|:--:|:--:|
-|1|"イギリス"|"{{redirect|UK\|
+|1|"イギリス"|"{{redirect\|UK}}...|
 
 # 21. カテゴリ名を含む行を抽出
 > 記事中でカテゴリ名を宣言している行を抽出せよ．
@@ -285,11 +292,11 @@ out = regexp(UKWiki.text,'\[{2}Category:([^\]]*)\]{2}','tokens')'
 
 | |1|
 |:--:|:--:|
-|1|"イギリス|*"|
+|1|"イギリス\|*"|
 |2|"イギリス連邦加盟国"|
-|3|"英連邦王国|*"|
+|3|"英連邦王国\|*"|
 |4|"G8加盟国"|
-|5|"欧州連合加盟国|元"|
+|5|"欧州連合加盟国\|元"|
 |6|"海洋国家"|
 |7|"現存する君主国"|
 |8|"島国"|
@@ -394,7 +401,8 @@ ans = 55x1 string
 out = regexp(UKWiki.text,'(={2,})([^=]+)\1','tokens')';
 levels = cellfun(@(x) strlength(x(1)),out)-1;
 sectionNames = cellfun(@(x) x(2),out);
-table(sectionNames,levels)
+sections = table(sectionNames,levels);
+head(sections)
 ```
 
 | |sectionNames|levels|
@@ -407,12 +415,6 @@ table(sectionNames,levels)
 |6|"政治"|1|
 |7|"元首"|2|
 |8|"法"|2|
-|9|"内政"|2|
-|10|"地方行政区分"|2|
-|11|"外交・軍事"|2|
-|12|"経済"|1|
-|13|"鉱業"|2|
-|14|"農業"|2|
 
 # 24. ファイル参照の抽出
 > 記事から参照されているメディアファイルをすべて抜き出せ．
@@ -495,25 +497,25 @@ ans = 27x1 string
 
 
 ```matlab:Code
-regexp(UKWiki.text,'\[{2}ファイル:([^\]\|]*)(?:\]{2}|\|)','tokens')'
+tmp = regexp(UKWiki.text,'\[{2}ファイル:([^\]\|]*)(?:\]{2}|\|)','tokens')'; % cell 配列での出力
+string(tmp)
 ```
 
-| |1|
-|:--:|:--:|
-|1|"Royal Coat of Arms of the United Kingdom.svg"|
-|2|"United States Navy Band - God Save the Queen.ogg"|
-|3|"Descriptio Prime Tabulae Europae.jpg"|
-|4|"Lenepveu, Jeanne d'Arc au siège d'Orléans.jpg"|
-|5|"London.bankofengland.arp.jpg"|
-|6|"Battle of Waterloo 1815.PNG"|
-|7|"Uk topo en.jpg"|
-|8|"BenNevis2005.jpg"|
-|9|"Population density UK 2011 census.png"|
-|10|"2019 Greenwich Peninsula \& Canary Wharf.jpg"|
-|11|"Birmingham Skyline from Edgbaston Cricket Ground crop.jpg"|
-|12|"Leeds CBD at night.jpg"|
-|13|"Glasgow and the Clyde from the air (geograph 4665720).jpg"|
-|14|"Palace of Westminster, London - Feb 2007.jpg"|
+
+```text:Output
+ans = 28x1 string    
+"Royal Coat of Arms of the U…  
+"United States Navy Band - G…  
+"Descriptio Prime Tabulae Eu…  
+"Lenepveu, Jeanne d'Arc au s…  
+"London.bankofengland.arp.jpg" 
+"Battle of Waterloo 1815.PNG"  
+"Uk topo en.jpg"               
+"BenNevis2005.jpg"             
+"Population density UK 2011 …  
+"2019 Greenwich Peninsula & …  
+
+```
 
 
 
@@ -550,7 +552,7 @@ regexp(UKWiki.text,'\[{2}ファイル:([^\]\|]*)(?:\]{2}|\|)','tokens')'
 
 
 ```matlab:Code
-regexp(UKWiki.text,'\[{2}ファイル:([^\]\|]*)(?:\]{2}|\|[^\]\|]*)+','tokens')';
+regexp(UKWiki.text,'\[{2}ファイル:([^\]\|]*)(?:\]{2}|\|[^\]\|]*)+','tokens');
 ```
 
 
@@ -847,25 +849,20 @@ ans = 1x2 string
 ```matlab:Code
 fields = cellfun(@(x) x(1), baseTokens);
 elements = cellfun(@(x) x(2), baseTokens);
-UKinfo = table(fields,elements)
+UKinfo = table(fields,elements);
+head(UKinfo)
 ```
 
 | |fields|elements|
 |:--:|:--:|:--:|
 |1|"略名 "|"イギリス"|
-|2|"日本語国名"|" グレートブリテン及び北アイルランド連合王国"|
-|3|"公式国名"|" {{lang|en|United Kingdom of Great Britain and Northern Ireland\|
-|4|"国旗画像"|" Flag of the United Kingdom.svg"|
-|5|"国章画像"|" [[ファイル:Royal Coat of Arms of the United Kingdom.svg|85px|イギリスの国章]]"|
-|6|"国章リンク"|"（[[イギリスの国章|国章]]）"|
-|7|"標語"|" {{lang|fr|[[Dieu et mon droit]]\|
-|8|"国歌"|" [[女王陛下万歳|{{lang|en|God Save the Queen\|
-|9|"地図画像"|" Europe-UK.svg"|
-|10|"位置画像"|" United Kingdom (+overseas territories) in the World (+Antarctica claims).svg"|
-|11|"公用語"|" [[英語]]"|
-|12|"首都"|" [[ロンドン]]（事実上）"|
-|13|"最大都市"|" ロンドン"|
-|14|"元首等肩書"|" [[イギリスの君主|女王]]"|
+|2|"日本語国名"|" グレートブリテン及び北アイルランド連...|
+|3|"公式国名"|" {{lang\|en\|United...|
+|4|"国旗画像"|" Flag of the United...|
+|5|"国章画像"|" [[ファイル:Royal Coat ...|
+|6|"国章リンク"|"（[[イギリスの国章\|国章]]）"|
+|7|"標語"|" {{lang\|fr\|[[Dieu...|
+|8|"国歌"|" [[女王陛下万歳\|{{lang\|...|
 
 ## 辞書オブジェクトとは？ 
 
@@ -1182,14 +1179,77 @@ baseinfo1 = regexprep(baseinfo1,'\{{2}(\d)\}{2}','$1');
 baseTokens = regexp(baseinfo1,'(?<=\n)\|([^\|\=]*) =\s?([^\|]*)\n','tokens')';
 fields = cellfun(@(x) x(1), baseTokens);
 elements = cellfun(@(x) x(2), baseTokens);
-table(fields,elements)
+join([fields+":"+elements],newline)
 ```
 
-| |fields|elements|
-|:--:|:--:|:--:|
-|1|"略名 "|"イギリス"|
-|2|"日本語国名"|"グレートブリテン及び北アイルランド連合王国"|
-|3|"公式国名"|
+
+```text:Output
+ans = 
+    "略名 :イギリス
+     日本語国名:グレートブリテン及び北アイルランド連合王国
+     公式国名:United Kingdom of Great Britain and Northern Ireland英語以外での正式国名:
+     *An Rìoghachd Aonaichte na Breatainn Mhòr agus Eirinn mu Thuath（スコットランド・ゲール語）
+     *Teyrnas Gyfunol Prydain Fawr a Gogledd Iwerddon（ウェールズ語）
+     *Ríocht Aontaithe na Breataine Móire agus Tuaisceart na hÉireann（アイルランド語）
+     *An Rywvaneth Unys a Vreten Veur hag Iwerdhon Glédh（コーンウォール語）
+     *Unitit Kinrick o Great Breetain an Northren Ireland（スコットランド語）
+     **Claught Kängrick o Docht Brätain an Norlin Airlann、Unitet Kängdom o Great Brittain an Norlin Airlann（アルスター・スコットランド語）
+     国旗画像:Flag of the United Kingdom.svg
+     国章画像:Royal Coat of Arms of the United Kingdom.svg
+     国章リンク:（国章）
+     標語:Dieu et mon droit（フランス語:神と我が権利）
+     地図画像:Europe-UK.svg
+     位置画像:United Kingdom (+overseas territories) in the World (+Antarctica claims).svg
+     公用語:英語
+     首都:ロンドン（事実上）
+     最大都市:ロンドン
+     元首等肩書:女王
+     元首等氏名:エリザベス2世
+     首相等肩書:首相
+     首相等氏名:ボリス・ジョンソン
+     他元首等肩書1:貴族院議長
+     他元首等氏名1:ノーマン・ファウラー
+     他元首等肩書2:庶民院議長
+     他元首等氏名2:リンゼイ・ホイル
+     他元首等肩書3:最高裁判所長官
+     他元首等氏名3:ブレンダ・ヘイル
+     面積順位:76
+     面積大きさ:1 E11
+     面積値:244,820
+     水面積率:1.3%
+     人口統計年:2018
+     人口順位:22
+     人口大きさ:1 E7
+     人口値:6643万5600
+     人口密度値:271
+     GDP統計年元:2012
+     GDP値元:1兆5478億
+     GDP統計年MER:2012
+     GDP順位MER:6
+     GDP値MER:2兆4337億
+     GDP統計年:2012
+     GDP順位:6
+     GDP値:2兆3162億
+     GDP/人:36,727
+     建国形態:建国
+     確立形態1:イングランド王国／スコットランド王国（両国とも1707年合同法まで）
+     確立年月日1:927年／843年
+     確立形態2:グレートブリテン王国成立（1707年合同法）
+     確立年月日2:1707年05月01日
+     確立形態3:グレートブリテン及びアイルランド連合王国成立（1800年合同法）
+     確立年月日3:1801年01月01日
+     確立形態4:現在の国号「グレートブリテン及び北アイルランド連合王国」に変更
+     確立年月日4:1927年04月12日
+     通貨:UKポンド (£)
+     通貨コード:GBP
+     時間帯:±0
+     夏時間:+1
+     ISO 3166-1:GB / GBR
+     ccTLD:.uk / .gb使用は.ukに比べ圧倒的少数。
+     国際電話番号:44
+     注記:"
+
+```
 
 
 
