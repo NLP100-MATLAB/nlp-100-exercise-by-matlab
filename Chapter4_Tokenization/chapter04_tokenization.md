@@ -1,6 +1,11 @@
 # 第4章: 形態素解析
 
 
+Copyright (c) 2020 NLP100-MATLAB
+
+
+
+
 夏目漱石の小説『吾輩は猫である』の文章（[neko.txt](https://nlp100.github.io/data/neko.txt)）をMeCabを使って形態素解析し，その結果をneko.txt.mecabというファイルに保存せよ．このファイルを用いて，以下の問に対応するプログラムを実装せよ．
 
 
@@ -13,7 +18,6 @@
 
 
 MATLABR2020a 
-
 
 
 
@@ -42,7 +46,7 @@ system(sprintf('%s %s -o %s',mecabCommand,inputFile,outputFile));
   
 
 
-せっかくText Analytics Toolboxがあるので，MeCabの出力を読み込むことはせずに，直接MATLAB上で処理をします．「各形態素をマッピング型に格納し，1文を形態素（マッピング型）のリストとして表現せよ」というところは，`tokenizedDocument `オブジェクトが対応する「マッピング型」である（表層系などの詳細情報は直接参照できないけど）と強弁してやり過ごすことにします．ただし，MeCabの品詞再分類の情報が必要なので，ちょっと工夫がいります．詳しくは [こちら](https://qiita.com/h583/items/e223d9c75b653fda7d34)の記事をどうぞ．
+せっかくText Analytics Toolboxがあるので，MeCabの出力を読み込むことはせずに，直接MATLAB上で処理をします．「各形態素をマッピング型に格納し，1文を形態素（マッピング型）のリストとして表現せよ」というところは，`tokenizedDocument `オブジェクトが対応する「マッピング型」である（表層系などの詳細情報は直接参照できないけど）と強弁してやり過ごすことにします．ただし，MeCabの品詞再分類の情報が必要なので，ちょっと工夫がいります．詳しくは こちらの記事をどうぞ．
 
 
 
@@ -455,12 +459,7 @@ set(gca,'XTickLabel',bowTable.Word(1:10));
 ```
 
 
-<--
-**Please drag & drop an image file here**
-Filename: **chapter04_tokenization_images/figure_0.png**
-If you want to set the image size use the following command
-<img src=" alt="attach:cat" title="attach:cat" width=500px>
--->
+![figure_0.png](chapter04_tokenization_images/figure_0.png)
 
 # 37. 「猫」と共起頻度の高い上位10語
 > 「猫」とよく共起する（共起頻度が高い）10語とその出現頻度をグラフ（例えば棒グラフなど）で表示せよ．
@@ -525,12 +524,7 @@ set(gca,'XTickLabel',bowCatTable.Word);
 ```
 
 
-<--
-**Please drag & drop an image file here**
-Filename: **chapter04_tokenization_images/figure_1.png**
-If you want to set the image size use the following command
-<img src=" alt="attach:cat" title="attach:cat" width=500px>
--->
+![figure_1.png](chapter04_tokenization_images/figure_1.png)
 
 # 38. ヒストグラム
 > 単語の出現頻度のヒストグラム（横軸に出現頻度，縦軸に出現頻度をとる単語の種類数を棒グラフで表したもの）を描け．
@@ -550,12 +544,7 @@ ylabel('語彙数');
 ```
 
 
-<--
-**Please drag & drop an image file here**
-Filename: **chapter04_tokenization_images/figure_2.png**
-If you want to set the image size use the following command
-<img src=" alt="attach:cat" title="attach:cat" width=500px>
--->
+![figure_2.png](chapter04_tokenization_images/figure_2.png)
 
 # 39. Zipfの法則
 > 単語の出現頻度順位を横軸，その出現頻度を縦軸として，両対数グラフをプロットせよ．
@@ -575,16 +564,5 @@ ylabel('出現頻度')
 ```
 
 
-<--
-**Please drag & drop an image file here**
-Filename: **chapter04_tokenization_images/figure_3.png**
-If you want to set the image size use the following command
-<img src=" alt="attach:cat" title="attach:cat" width=500px>
--->
-
-  
-
-\begin{flushright}
-Copyright 2020, The MathWorks, Inc.
-\end{flushright}
+![figure_3.png](chapter04_tokenization_images/figure_3.png)
 
