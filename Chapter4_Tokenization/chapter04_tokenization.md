@@ -16,6 +16,7 @@ MATLABR2020a
 
 
 
+
 TextAnalyticsToolbox
 
 
@@ -41,7 +42,7 @@ system(sprintf('%s %s -o %s',mecabCommand,inputFile,outputFile));
   
 
 
-せっかくText Analytics Toolboxがあるので，MeCabの出力を読み込むことはせずに，直接MATLAB上で処理をします．「各形態素をマッピング型に格納し，1文を形態素（マッピング型）のリストとして表現せよ」というところは，`tokenizedDocument `オブジェクトが対応する「マッピング型」である（表層系などの詳細情報は直接参照できないけど）と強弁してやり過ごすことにします．ただし，MeCabの品詞再分類の情報が必要なので，ちょっと工夫がいります．詳しくは [こちらの記事](https://qiita.com/h583/items/e223d9c75b653fda7d34)をどうぞ．
+せっかくText Analytics Toolboxがあるので，MeCabの出力を読み込むことはせずに，直接MATLAB上で処理をします．「各形態素をマッピング型に格納し，1文を形態素（マッピング型）のリストとして表現せよ」というところは，`tokenizedDocument `オブジェクトが対応する「マッピング型」である（表層系などの詳細情報は直接参照できないけど）と強弁してやり過ごすことにします．ただし，MeCabの品詞再分類の情報が必要なので，ちょっと工夫がいります．詳しくは [こちら](https://qiita.com/h583/items/e223d9c75b653fda7d34)の記事をどうぞ．
 
 
 
@@ -580,4 +581,10 @@ Filename: **chapter04_tokenization_images/figure_3.png**
 If you want to set the image size use the following command
 <img src=" alt="attach:cat" title="attach:cat" width=500px>
 -->
+
+  
+
+\begin{flushright}
+Copyright 2020, The MathWorks, Inc.
+\end{flushright}
 
