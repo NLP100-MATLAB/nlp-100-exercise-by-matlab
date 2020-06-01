@@ -253,7 +253,6 @@ idx = find(lidx);
 
 
 ```matlab:Code
-
 nounPhrase = tkns.surface(idx)+tkns.surface(idx+1)+tkns.surface(idx+2)
 ```
 
