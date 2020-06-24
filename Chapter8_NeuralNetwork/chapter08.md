@@ -51,10 +51,6 @@ Copyright (c) 2020 NLP100-MATLAB
 <img src="https://latex.codecogs.com/gif.latex?\inline&space;i"/>番目の事例のラベル<img src="https://latex.codecogs.com/gif.latex?\inline&space;y_i"/>は，次のように定義する．
 
 
-
-\left\{\begin{matrix}0&space;\left( \right)\\1&space;\left( \right)\\2&space;\left( \right)\\3&space;\left( 合\right)\end{matrix}\right)"/>
-
-
  * <img src="https://latex.codecogs.com/gif.latex?y_i&space;=0&space;"/> (記事<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_i"/>が「ビジネス」カテゴリの場合)
  * <img src="https://latex.codecogs.com/gif.latex?y_i&space;=1&space;"/> (記事<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_i"/>が「科学技術」カテゴリの場合)
  * <img src="https://latex.codecogs.com/gif.latex?y_i&space;=2&space;"/> (記事<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_i"/>が「エンターテイメント」カテゴリの場合)
@@ -80,7 +76,7 @@ Copyright (c) 2020 NLP100-MATLAB
 
 
 
-なお，<img src="https://latex.codecogs.com/gif.latex?\inline&space;N_t&space;,N_v&space;,N_e"/>はそれぞれ，学習データの事例数，検証データの事例数，評価データの事例数である**．**
+なお，<img src="https://latex.codecogs.com/gif.latex?\inline&space;N_t&space;,N_v&space;,N_e"/>はそれぞれ，学習データの事例数，検証データの事例数，評価データの事例数である．
 
 
   
@@ -230,7 +226,10 @@ YTestVec = 1334x1
 
 
 
-ただし，<img src="https://latex.codecogs.com/gif.latex?\inline&space;{{softmax}}"/>はソフトマックス関数，<img src="https://latex.codecogs.com/gif.latex?\inline&space;X_{[1:4]}&space;\in&space;{\mathbb{R}}^{4\times&space;d}"/>は特徴ベクトル<img src="https://latex.codecogs.com/gif.latex?\inline&space;{{x_1&space;,{{x_2&space;,{{x_3&space;,{{x_4&space;}}}}}}}}"/>を縦に並べた行列である．
+ただし，
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;{{softmax}}"/>はソフトマックス関数，
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;X_{[1:4]}&space;\in&space;{\mathbb{R}}^{4\times&space;d}"/>は特徴ベクトル
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_1,&space;x_2,&space;x_3,&space,x_4&space;"/>を縦に並べた行列である．
 
 
 
@@ -238,10 +237,16 @@ YTestVec = 1334x1
 
 
 
-行列<img src="https://latex.codecogs.com/gif.latex?\inline&space;W\in&space;{\mathbb{R}}^{d\times&space;L}"/>は単層ニューラルネットワークの重み行列で，ここではランダムな値で初期化すればよい（問題73以降で学習して求める）．なお，<img src="https://latex.codecogs.com/gif.latex?\inline&space;{\hat{y}&space;}_1&space;\in&space;{\mathbb{N}}^L"/>は未学習の行列<img src="https://latex.codecogs.com/gif.latex?\inline&space;W"/>で事例<img src="https://latex.codecogs.com/gif.latex?\inline&space;{{x_1&space;}}"/>を分類したときに，各カテゴリに属する確率を表すベクトルである． 同様に，<img src="https://latex.codecogs.com/gif.latex?\inline&space;\hat{Y}&space;\in&space;{\mathbb{N}}^{n\times&space;L}"/>は，学習データの事例<img src="https://latex.codecogs.com/gif.latex?\inline&space;{{x_1&space;,{{x_2&space;,{{x_3&space;,{{x_4&space;}}}}}}}}"/>について，各カテゴリに属する確率を行列として表現している．
+行列
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;W\in&space;{\mathbb{R}}^{d\times&space;L}"/>は単層ニューラルネットワークの重み行列で，ここではランダムな値で初期化すればよい（問題73以降で学習して求める）．なお，
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;{\hat{y}&space;}_1&space;\in&space;{\mathbb{N}}^L"/>は未学習の行列
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;W"/>で事例
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;{{x_1&space;}}"/>を分類したときに，各カテゴリに属する確率を表すベクトルである． 同様に，
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;\hat{Y}&space;\in&space;{\mathbb{N}}^{n\times&space;L}"/>は，学習データの事例
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_1,&space;x_2,&space;x_3,&space;x_4&space;"/>について，各カテゴリに属する確率を行列として表現している．
 
 
-\matlabheadingtwo{<img src="https://latex.codecogs.com/gif.latex?\inline&space;{W}"/>の定義}
+##  <img src="https://latex.codecogs.com/gif.latex?\inline&space;{W}"/>の定義}
 
 
 word2vec モデルからモデル次元,学習データからカテゴリー数を取得して，行列<img src="https://latex.codecogs.com/gif.latex?\inline&space;{W}"/>を生成します．
@@ -275,7 +280,7 @@ Yhat = 4x4 の single 行列
 
 ```
 
-\matlabheadingtwo{<img src="https://latex.codecogs.com/gif.latex?\inline&space;{\hat{y}&space;}_1"/>の計算}
+## <img src="https://latex.codecogs.com/gif.latex?\inline&space;{\hat{y}&space;}_1"/>の計算}
 
 
 <img src="https://latex.codecogs.com/gif.latex?\inline&space;\hat{Y}"/>の計算ができていれば，単一の事例に対する計算結果は対応する行を抜き出すだけです．
@@ -296,11 +301,18 @@ yhat_1 = 1x4 の single 行ベクトル
 # 72. 損失と勾配の計算
 
 
-学習データの事例<img src="https://latex.codecogs.com/gif.latex?\inline&space;{{x_1&space;}}"/>と事例集合<img src="https://latex.codecogs.com/gif.latex?\inline&space;{{x_1&space;,{{x_2&space;,{{x_3&space;,{{x_4&space;}}}}}}}}"/>に対して，クロスエントロピー損失と，行列<img src="https://latex.codecogs.com/gif.latex?\inline&space;W"/>に対する勾配を計算せよ．なお，ある事例<img src="https://latex.codecogs.com/gif.latex?\inline&space;{{x_i&space;}}"/>に対して損失は次式で計算される．
+学習データの事例
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_1&space;"/>と事例集合
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_1,&space;x_2,&space;x_3,&space;x_4&space;"/>に対して，クロスエントロピー損失と，行列
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;W"/>に対する勾配を計算せよ．なお，ある事例
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_i&space;"/>に対して損失は次式で計算される．
 
 
 
-<img src="https://latex.codecogs.com/gif.latex?l_i&space;=-\log&space;[\textrm{事例}{x}_i&space;\textrm{が}y_i&space;\textrm{に分類される確率}]"/>
+<img src="https://latex.codecogs.com/gif.latex?l_i&space;=-\log&space;p_{ij}"/> (
+<img src="https://latex.codecogs.com/gif.latex?r_{ij}"/>は事例
+<img src="https://latex.codecogs.com/gif.latex?x_i"/>が
+<img src="https://latex.codecogs.com/gif.latex?y_i&space;"/>に分類される確率)
 
 
 
