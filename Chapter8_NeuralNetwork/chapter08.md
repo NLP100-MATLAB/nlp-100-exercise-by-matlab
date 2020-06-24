@@ -259,7 +259,7 @@ numClasses = numel( categories(dataTrain.Category));
 W = rand([inputSize, numClasses]);
 ```
 
-##<img src="https://latex.codecogs.com/gif.latex?\inline&space;\hat{Y}"/>の計算
+## <img src="https://latex.codecogs.com/gif.latex?\inline&space;\hat{Y}"/>の計算
 
 
 数式の通りに記述するだけ，と言いたいのですが一つだけ注意が必要です．一般に機械学習ではデータの行列は行が観測，列が特徴量に対応していますが，深層学習ではそれが逆になります．MATLABの関数の実装も概ねこの原理に従っていますので，`softmax`関数の入力は<img src="https://latex.codecogs.com/gif.latex?\inline&space;{{x_i&space;{W}}}"/>を転置したものになります．結果の確率ベクトルを行ベクトルにするためには，さらに`softmax`関数の計算結果をもう一度転置する必要があります．
