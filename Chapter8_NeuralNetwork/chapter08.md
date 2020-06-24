@@ -66,12 +66,12 @@ Copyright (c) 2020 NLP100-MATLAB
 
 
 
-   \item{ 学習データの特徴量行列: <img src="https://latex.codecogs.com/gif.latex?\inline&space;X_{{{train}}}&space;\in&space;{\mathbb{R}}^{N_t&space;\times&space;d}"/> }
-   \item{ 学習データのラベルベクトル:<img src="https://latex.codecogs.com/gif.latex?\inline&space;Y_{{{train}}}&space;\in&space;{\mathbb{N}}^{N_t&space;}"/> }
-   \item{ 検証データの特徴量行列: <img src="https://latex.codecogs.com/gif.latex?\inline&space;X_{{{valid}}}&space;\in&space;{\mathbb{R}}^{N_v&space;\times&space;d}"/> }
-   \item{ 検証データのラベルベクトル: <img src="https://latex.codecogs.com/gif.latex?\inline&space;Y_{{{valid}}}&space;\in&space;{\mathbb{N}}^{N_v&space;}"/> }
-   \item{ 評価データの特徴量行列: <img src="https://latex.codecogs.com/gif.latex?\inline&space;X_{{{test}}}&space;\in&space;{\mathbb{R}}^{N_e&space;\times&space;d}"/> }
-   \item{ 評価データのラベルベクトル: <img src="https://latex.codecogs.com/gif.latex?\inline&space;X_{{{test}}}&space;\in&space;{\mathbb{N}}^{N_e&space;}"/> }
+   * 学習データの特徴量行列: <img src="https://latex.codecogs.com/gif.latex?\inline&space;X_{{{train}}}&space;\in&space;{\mathbb{R}}^{N_t&space;\times&space;d}"/>
+   * 学習データのラベルベクトル:<img src="https://latex.codecogs.com/gif.latex?\inline&space;Y_{{{train}}}&space;\in&space;{\mathbb{N}}^{N_t&space;}"/>
+   * 検証データの特徴量行列: <img src="https://latex.codecogs.com/gif.latex?\inline&space;X_{{{valid}}}&space;\in&space;{\mathbb{R}}^{N_v&space;\times&space;d}"/>
+   * 検証データのラベルベクトル: <img src="https://latex.codecogs.com/gif.latex?\inline&space;Y_{{{valid}}}&space;\in&space;{\mathbb{N}}^{N_v&space;}"/>
+   * 評価データの特徴量行列: <img src="https://latex.codecogs.com/gif.latex?\inline&space;X_{{{test}}}&space;\in&space;{\mathbb{R}}^{N_e&space;\times&space;d}"/>
+   * 評価データのラベルベクトル: <img src="https://latex.codecogs.com/gif.latex?\inline&space;X_{{{test}}}&space;\in&space;{\mathbb{N}}^{N_e&space;}"/>
 
 
 
