@@ -310,7 +310,7 @@ yhat_1 = 1x4 の single 行ベクトル
 
 
 <img src="https://latex.codecogs.com/gif.latex?l_i&space;=-\log&space;p_{ij}"/> (
-<img src="https://latex.codecogs.com/gif.latex?r_{ij}"/>は事例
+<img src="https://latex.codecogs.com/gif.latex?{r_{ij}}"/>は事例
 <img src="https://latex.codecogs.com/gif.latex?x_i"/>が
 <img src="https://latex.codecogs.com/gif.latex?y_i&space;"/>に分類される確率)
 
