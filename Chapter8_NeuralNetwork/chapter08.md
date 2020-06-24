@@ -9,11 +9,7 @@ Copyright (c) 2020 NLP100-MATLAB
 # 70. 単語ベクトルの和による特徴量
 
 
-問題50で構築した学習データ，検証データ，評価データを行列・ベクトルに変換したい．例えば，学習データについて，すべての事例<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_i"/>の特徴ベクトル<img src="https://latex.codecogs.com/gif.latex?\inline&space;{{{{x_i&space;}}}}"/>を並べた行列<img src="https://latex.codecogs.com/gif.latex?\inline&space;\begin{array}{c}
-X
-\end{array}"/>と，正解ラベルを並べた行列（ベクトル）<img src="https://latex.codecogs.com/gif.latex?\inline&space;\begin{array}{c}
-Y
-\end{array}"/>を作成したい．
+問題50で構築した学習データ，検証データ，評価データを行列・ベクトルに変換したい．例えば，学習データについて，すべての事例<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_i"/>の特徴ベクトル<img src="https://latex.codecogs.com/gif.latex?\inline&space;{{{{x_i&space;}}}}"/>を並べた行列<img src="https://latex.codecogs.com/gif.latex?\inline&space;X"/>と，正解ラベルを並べた行列（ベクトル）<img src="https://latex.codecogs.com/gif.latex?\inline&space;Y"/>を作成したい．
 
 
 
@@ -21,7 +17,7 @@ Y
 
 
 
-ここで，<img src="https://latex.codecogs.com/gif.latex?\inline&space;n"/>は学習データの事例数であり，<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_i&space;\in&space;{\mathbb{R}}^d"/>と$y_i \in \mathbb{N}<img src="https://latex.codecogs.com/gif.latex?\inline&space;はそれぞれ，"/>i\in \left\lbrace 1,\dots ,n\right\rbrace<img src="https://latex.codecogs.com/gif.latex?\inline&space;番目の事例の特徴量ベクトルと正解ラベルを表す．&space;なお，今回は「ビジネス」「科学技術」「エンターテイメント」「健康」の4カテゴリ分類である．"/>{\mathbb{N}}_{<4}<img src="https://latex.codecogs.com/gif.latex?\inline&space;で4未満の自然数（0を含む）を表すことにすれば，任意の事例の正解ラベル"/>y_i<img src="https://latex.codecogs.com/gif.latex?\inline&space;は"/>y_i \in {\mathbb{N}}_{<4}<img src="https://latex.codecogs.com/gif.latex?\inline&space;で表現できる．&space;以降では，ラベルの種類数を"/>L$で表す（今回の分類タスクでは<img src="https://latex.codecogs.com/gif.latex?\inline&space;L=4"/>である）．
+ここで，<img src="https://latex.codecogs.com/gif.latex?\inline&space;n"/>は学習データの事例数であり，<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_i&space;\in&space;{\mathbb{R}}^d"/>と<img src="https://latex.codecogs.com/gif.latex?\inline&space;y_i&space\in&space;\mathbb{N}"/>はそれぞれ，<img src="https://latex.codecogs.com/gif.latex?\inline&space;i\in\left\lbrace&space;1,\dots,n\right\rbrace&space;"/>番目の事例の特徴量ベクトルと正解ラベルを表す．なお，今回は「ビジネス」「科学技術」「エンターテイメント」「健康」の4カテゴリ分類である．<img src="https://latex.codecogs.com/gif.latex?\inline&space;{\mathbb{N}}_{<4}"/>で4未満の自然数（0を含む）を表すことにすれば，任意の事例の正解ラベル<img src="https://latex.codecogs.com/gif.latex?\inline&space;y_iは"/<img src="https://latex.codecogs.com/gif.latex?\inline&space;y_i&space;\in{\mathbb{N}}_{<4}">で表現できる．以降では，ラベルの種類数を<img src="https://latex.codecogs.com/gif.latex?\inline&space;L"/>で表す（今回の分類タスクでは<img src="https://latex.codecogs.com/gif.latex?\inline&space;L=4"/>である）．
 
 
 
@@ -34,7 +30,17 @@ Y
 
 
 
-ここで，<img src="https://latex.codecogs.com/gif.latex?\inline&space;i"/>番目の事例は<img src="https://latex.codecogs.com/gif.latex?\inline&space;T_i"/>個の（記事見出しの）単語列<img src="https://latex.codecogs.com/gif.latex?\inline&space;\left(w_{i,1}&space;,w_{i,2}&space;,\dots&space;,w_{i,T_i&space;}&space;\right)"/>から構成され，<img src="https://latex.codecogs.com/gif.latex?\inline&space;{{emb}}\left(w\right)\in&space;{\mathbb{R}}^d"/>は単語<img src="https://latex.codecogs.com/gif.latex?\inline&space;w"/>に対応する単語ベクトル（次元数は<img src="https://latex.codecogs.com/gif.latex?\inline&space;d"/>）である．すなわち，<img src="https://latex.codecogs.com/gif.latex?\inline&space;i"/>番目の事例の記事見出しを，その見出しに含まれる単語のベクトルの平均で表現したものが<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_i"/>である．今回は単語ベクトルとして，問題60でダウンロードしたものを用いればよい．<img src="https://latex.codecogs.com/gif.latex?\inline&space;300"/>次元の単語ベクトルを用いたので，<img src="https://latex.codecogs.com/gif.latex?\inline&space;d=300"/>である．
+ここで，
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;i"/>番目の事例は
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;T_i"/>個の（記事見出しの）単語列
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;\left(w_{i,1}&space;,w_{i,2}&space;,\dots&space;,w_{i,T_i}&space;\right)"/>から構成され，
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;{{emb}}\left(w\right)\in&space;{\mathbb{R}}^d"/>は単語
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;w"/>に対応する単語ベクトル（次元数は
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;d"/>）である．すなわち，
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;i"/>番目の事例の記事見出しを，その見出しに含まれる単語のベクトルの平均で表現したものが
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_i"/>である．今回は単語ベクトルとして，問題60でダウンロードしたものを用いればよい．
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;300"/>次元の単語ベクトルを用いたので，
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;d=300"/>である．
 
 
 
@@ -43,7 +49,14 @@ Y
 
 
 
-<img src="https://latex.codecogs.com/gif.latex?y_i&space;=\left\lbrace&space;\begin{array}{ll}&space;0&space;&&space;(記事x_i&space;が「ビジネス」カテゴリの場合)\\&space;1&space;&&space;(記事x_i&space;が「科学技術」カテゴリの場合)\\&space;2&space;&&space;(記事x_i&space;が「エンターテイメント」カテゴリの場合)\\&space;3&space;&&space;(記事x_i&space;が「健康」カテゴリの場合)&space;\end{array}\right."/>
+<img src="https://latex.codecogs.com/gif.latex?y_i&space;=y_i=\left\{\begin{matrix}
+0&space;\left( 記事x_iが「ビジネス」カテゴリの場合\right )\\
+1&space;\left( 記事x_iが「科学技術」カテゴリの場合\right )\\
+2&space;\left( 記事x_iが「エンターテイメント」カテゴリの場合\right )\\
+3&space;\left( 記事x_iが「健康」カテゴリの場合\right )\\
+\end{matrix}\right.
+
+\left\lbrace&space;\begin{array}{ll}&space;0&space;&&space;(記事x_i&space;が「ビジネス」カテゴリの場合)\\&space;1&space;&&space;(記事x_i&space;が「科学技術」カテゴリの場合)\\&space;2&space;&&space;(記事x_i&space;が「エンターテイメント」カテゴリの場合)\\&space;3&space;&&space;(記事x_i&space;が「健康」カテゴリの場合)&space;\end{array}\right."/>
 
 
 
