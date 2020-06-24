@@ -246,7 +246,7 @@ YTestVec = 1334x1
 <img src="https://latex.codecogs.com/gif.latex?\inline&space;x_1,&space;x_2,&space;x_3,&space;x_4&space;"/>について，各カテゴリに属する確率を行列として表現している．
 
 
-##  <img src="https://latex.codecogs.com/gif.latex?\inline&space;{W}"/>の定義}
+##  <img src="https://latex.codecogs.com/gif.latex?\inline&space;{W}"/>の定義
 
 
 word2vec モデルからモデル次元,学習データからカテゴリー数を取得して，行列<img src="https://latex.codecogs.com/gif.latex?\inline&space;{W}"/>を生成します．
@@ -259,7 +259,7 @@ numClasses = numel( categories(dataTrain.Category));
 W = rand([inputSize, numClasses]);
 ```
 
-\matlabheadingtwo{<img src="https://latex.codecogs.com/gif.latex?\inline&space;\hat{Y}"/>の計算}
+##<img src="https://latex.codecogs.com/gif.latex?\inline&space;\hat{Y}"/>の計算
 
 
 数式の通りに記述するだけ，と言いたいのですが一つだけ注意が必要です．一般に機械学習ではデータの行列は行が観測，列が特徴量に対応していますが，深層学習ではそれが逆になります．MATLABの関数の実装も概ねこの原理に従っていますので，`softmax`関数の入力は<img src="https://latex.codecogs.com/gif.latex?\inline&space;{{x_i&space;{W}}}"/>を転置したものになります．結果の確率ベクトルを行ベクトルにするためには，さらに`softmax`関数の計算結果をもう一度転置する必要があります．
@@ -280,7 +280,7 @@ Yhat = 4x4 の single 行列
 
 ```
 
-## <img src="https://latex.codecogs.com/gif.latex?\inline&space;{\hat{y}&space;}_1"/>の計算}
+## <img src="https://latex.codecogs.com/gif.latex?\inline&space;{\hat{y}&space;}_1"/>の計算
 
 
 <img src="https://latex.codecogs.com/gif.latex?\inline&space;\hat{Y}"/>の計算ができていれば，単一の事例に対する計算結果は対応する行を抜き出すだけです．
