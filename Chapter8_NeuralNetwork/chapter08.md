@@ -55,10 +55,10 @@ Copyright (c) 2020 NLP100-MATLAB
 \left\{\begin{matrix}0&space;\left( \right)\\1&space;\left( \right)\\2&space;\left( \right)\\3&space;\left( 合\right)\end{matrix}\right)"/>
 
 
- * <img src="https://latex.codecogs.com/gif.latex?y_i&space;=0"/>(記事<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_i"/>が「ビジネス」カテゴリの場合)
- * <img src="https://latex.codecogs.com/gif.latex?y_i&space;=1"/> 記事<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_i"/>が「科学技術」カテゴリの場合
- * <img src="https://latex.codecogs.com/gif.latex?y_i&space;=2"/>記事<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_i"/>が「エンターテイメント」カテゴリの場合
- * <img src="https://latex.codecogs.com/gif.latex?y_i&space;=3"/>記事<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_i"/>が「健康」カテゴリの場
+ * <img src="https://latex.codecogs.com/gif.latex?y_i&space;=0&space;"/> (記事<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_i"/>が「ビジネス」カテゴリの場合)
+ * <img src="https://latex.codecogs.com/gif.latex?y_i&space;=1&space;"/> (記事<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_i"/>が「科学技術」カテゴリの場合)
+ * <img src="https://latex.codecogs.com/gif.latex?y_i&space;=2&space;"/> (記事<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_i"/>が「エンターテイメント」カテゴリの場合)
+ * <img src="https://latex.codecogs.com/gif.latex?y_i&space;=3&space;"/> (記事<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_i"/>が「健康」カテゴリの場合)
 
 
 
