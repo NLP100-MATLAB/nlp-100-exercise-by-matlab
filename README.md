@@ -23,7 +23,7 @@ https://nlp100.github.io/ja/ で公開されている言語処理100本ノック
 | 第5章: 係り受け解析　| misataguchi | in progress |
 | [第6章: 機械学習](Chapter6_MachineLearning/Chapter6_MachineLearning.md)　| minoue | in progress |
 | [第7章: 単語ベクトル](Chapter7_Wordembedding/Chapter7.md)　| misataguchi | completed |
-| [第8章: ニューラルネット](Chapter8_NeuralNetwork/Chapter8.md)　| tikegami-mw | completed |
+| [第8章: ニューラルネット](Chapter8_NeuralNetwork/chapter8.md)　| tikegami-mw | completed |
 | 第9章: RNN,CNN　| TBD | |
 | 第10章: 機械翻訳　| TBD | |
 
