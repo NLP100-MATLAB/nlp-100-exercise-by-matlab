@@ -241,11 +241,8 @@ YValid  = categorical(validTbl.Category);
 > ID番号で表現された単語列<img src="https://latex.codecogs.com/gif.latex?\inline&space;x=(x_1&space;,x_2&space;,\dots&space;,x_T&space;)"/>がある．ただし，<img src="https://latex.codecogs.com/gif.latex?\inline&space;T"/>は単語列の長さ，<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_t&space;\in&space;{\mathbb{R}}^V"/>は単語のID番号のone-hot表記である（<img src="https://latex.codecogs.com/gif.latex?\inline&space;V"/>は単語の総数である）．再帰型ニューラルネットワーク（RNN: Recurrent Neural Network）を用い，単語列<img src="https://latex.codecogs.com/gif.latex?\inline&space;x"/>からカテゴリ<img src="https://latex.codecogs.com/gif.latex?\inline&space;y"/>を予測するモデルとして，次式を実装せよ．
 
 > <img src="https://latex.codecogs.com/gif.latex?\vec{h_0&space;}&space;=0,"/>
-
 > <img src="https://latex.codecogs.com/gif.latex?\vec{h_t&space;}&space;=\overrightarrow{{{RNN}}}&space;\left({{emb\left(x_t&space;\right),\vec{h_{t-1}&space;}&space;}}\right),"/>
-
 > <img src="https://latex.codecogs.com/gif.latex?y={{softmax}}\left(W^{(yh)}&space;\vec{h_T&space;}&space;+b^{(y)}&space;\right)"/>
-
 > ただし， 
 <img src="https://latex.codecogs.com/gif.latex?\inline&space;{{emb}}\left(x\right)\in&space;{\mathbb{R}}^{d_w&space;}"/> は単語埋め込み（単語のone-hot表記から単語ベクトルに変換する関数），
 <img src="https://latex.codecogs.com/gif.latex?\inline&space;\vec{h_t&space;}&space;\in&space;{\mathbb{R}}^{d_h&space;}"/>は時刻
@@ -267,22 +264,14 @@ YValid  = categorical(validTbl.Category);
 <img src="https://latex.codecogs.com/gif.latex?\inline&space;g"/>は活性化関数（例えば
 <img src="https://latex.codecogs.com/gif.latex?\inline&space;{{tanh}}"/>やReLUなど）である．
 
-
-
-
 >なお，この問題ではパラメータの学習を行わず，ランダムに初期化されたパラメータで
-<img src="https://latex.codecogs.com/gif.latex?\inline&space;y"/>を計算するだけでよい．次元数などのハイパーパラメータは，
-<img src="https://latex.codecogs.com/gif.latex?\inline&space;d_w = 300"/>
-<img src="https://latex.codecogs.com/gif.latex?\inline&space;d_h=50"/>など，適当な値に設定せよ（以降の問題でも同様である）．
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;y"/>を計算するだけでよい．次元数などのハイパーパラメータは，<img src="https://latex.codecogs.com/gif.latex?\inline&space;d_w=300"/><img src="https://latex.codecogs.com/gif.latex?\inline&space;d_h=50"/>など，適当な値に設定せよ（以降の問題でも同様である）．
 
 
 ゴメンナサイ．LSTM使っていいっすか？
 
 
-
-
 入力層として`sequenceInputLayer` を設定します．入力するデータは問題80で求めた文書毎の単語IDのシーケンス `wordID `です．この場合には，入力サイズは1とします．続いて，wordEmbeddingLayer ですが，この層は単語のシーケンスから単語ベクトル（単語埋め込み）を学習します．LSTM層では隠れ層の初期値を問題の指示の通りにゼロにしておきます．その後は，通常の全結合層，ソフトマックス層，分類層と続きます．
-
 
 
 ```matlab:Code
@@ -302,10 +291,10 @@ layers = [ ...
   classificationLayer];
 ```
 
-# 82. 確率的勾配降下法による学習
+## 82. 確率的勾配降下法による学習
 
 
-確率的勾配降下法（SGD: Stochastic Gradient Descent）を用いて，問題81で構築したモデルを学習せよ．訓練データ上の損失と正解率，評価データ上の損失と正解率を表示しながらモデルを学習し，適当な基準（例えば10エポックなど）で終了させよ．
+> 確率的勾配降下法（SGD: Stochastic Gradient Descent）を用いて，問題81で構築したモデルを学習せよ．訓練データ上の損失と正解率，評価データ上の損失と正解率を表示しながらモデルを学習し，適当な基準（例えば10エポックなど）で終了させよ．
 
 
 
@@ -336,10 +325,10 @@ net = trainNetwork(XTrain,YTrain,layers,options);
 うーん．検証精度40％程度ですね．何が悪いんだろう・・・
 
 
-# 83. ミニバッチ化・GPU上での学習
+## 83. ミニバッチ化・GPU上での学習
 
 
-問題82のコードを改変し，<img src="https://latex.codecogs.com/gif.latex?\inline&space;B"/>事例ごとに損失・勾配を計算して学習を行えるようにせよ（<img src="https://latex.codecogs.com/gif.latex?\inline&space;B"/>の値は適当に選べ）．また，GPU上で学習を実行せよ．
+> 問題82のコードを改変し，<img src="https://latex.codecogs.com/gif.latex?\inline&space;B"/>事例ごとに損失・勾配を計算して学習を行えるようにせよ（<img src="https://latex.codecogs.com/gif.latex?\inline&space;B"/>の値は適当に選べ）．また，GPU上で学習を実行せよ．
 
 
 
@@ -374,10 +363,10 @@ net = trainNetwork(XTrain,YTrain,layers,options);
 ．やや過学習気味ですかね．いろいろとパラメータをいじってみても，検証精度80％がいいところでした．前半かなり暴れるのですが，学習率を下げると精度40％あたりのラインにトラップされてしまうみたいで，なかなかややこしいです．
 
 
-# 84. 単語ベクトルの導入
+## 84. 単語ベクトルの導入
 
 
-事前学習済みの単語ベクトル（例えば，Google Newsデータセット（約1,000億単語）での[学習済み単語ベクトル](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing)）で単語埋め込み<img src="https://latex.codecogs.com/gif.latex?\inline&space;{{emb}}\left(x\right)"/>を初期化し，学習せよ．
+> 事前学習済みの単語ベクトル（例えば，Google Newsデータセット（約1,000億単語）での[学習済み単語ベクトル](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing)）で単語埋め込み<img src="https://latex.codecogs.com/gif.latex?\inline&space;{{emb}}\left(x\right)"/>を初期化し，学習せよ．
 
 
 
@@ -526,30 +515,20 @@ confusionchart(YTest,Yhat,'ColumnSummary',"column-normalized","RowSummary","row-
 サンプル数の少ないクラスの分類精度が相対的に悪くなっているのがわかります．
 
 
-# 85. 双方向RNN・多層化
+## 85. 双方向RNN・多層化
 
 
-順方向と逆方向のRNNの両方を用いて入力テキストをエンコードし，モデルを学習せよ．
+> 順方向と逆方向のRNNの両方を用いて入力テキストをエンコードし，モデルを学習せよ．
 
 
+> <img src="https://latex.codecogs.com/gif.latex?{\overleftarrow{h}&space;}_{T+1}&space;=0,"/>
+> <img src="https://latex.codecogs.com/gif.latex?\overleftarrow{h_t&space;}&space;=\overleftarrow{{{RNN}}}&space;\left({{emb}}\left(x_t&space;\right),{\overleftarrow{h}&space;}_{t+1}&space;\right),"/>
 
-<img src="https://latex.codecogs.com/gif.latex?{\overleftarrow{h}&space;}_{T+1}&space;=0,"/>
+> <img src="https://latex.codecogs.com/gif.latex?y={{softmax}}\left(W^{(yh)}&space;\left\lbrack&space;{\overrightarrow{h}&space;}_T&space;;{\overleftarrow{h}&space;}_1&space;\right\rbrack&space;+b^{(y)}&space;\right)"/>
 
-
-<img src="https://latex.codecogs.com/gif.latex?\overleftarrow{h_t&space;}&space;=\overleftarrow{{{RNN}}}&space;\left({{emb}}\left(x_t&space;\right),{\overleftarrow{h}&space;}_{t+1}&space;\right),"/>
-
-
-<img src="https://latex.codecogs.com/gif.latex?y={{softmax}}\left(W^{(yh)}&space;\left\lbrack&space;{\overrightarrow{h}&space;}_T&space;;{\overleftarrow{h}&space;}_1&space;\right\rbrack&space;+b^{(y)}&space;\right)"/>
-
-
-
-ただし，<img src="https://latex.codecogs.com/gif.latex?\inline&space;\overrightarrow{h_t&space;}&space;\in&space;{\mathbb{R}}^{d_h&space;}&space;,\overleftarrow{h_t&space;}&space;\in&space;{\mathbb{R}}^{d_h&space;}"/>はそれぞれ，順方向および逆方向のRNNで求めた時刻ttの隠れ状態ベクトル，<img src="https://latex.codecogs.com/gif.latex?\inline&space;\overleftarrow{{{RNN}}}&space;\left(x,h\right)"/>は入力<img src="https://latex.codecogs.com/gif.latex?\inline&space;x"/>と次時刻の隠れ状態<img src="https://latex.codecogs.com/gif.latex?\inline&space;h"/>から前状態を計算するRNNユニット，<img src="https://latex.codecogs.com/gif.latex?\inline&space;W^{(yh)}&space;\in&space;{\mathbb{R}}^{L\times&space;2d_h&space;}"/>は隠れ状態ベクトルからカテゴリを予測するための行列，<img src="https://latex.codecogs.com/gif.latex?\inline&space;b^{(y)}&space;\in&space;{\mathbb{R}}^L"/>はバイアス項である．また，<img src="https://latex.codecogs.com/gif.latex?\inline&space;\left\lbrack&space;a;b\right\rbrack"/>はベクトル<img src="https://latex.codecogs.com/gif.latex?\inline&space;a"/>と$b$の連結を表す。
-
-
-  
-
-
-さらに，双方向RNNを多層化して実験せよ．
+> ただし，<img src="https://latex.codecogs.com/gif.latex?\inline&space;\overrightarrow{h_t&space;}&space;\in&space;{\mathbb{R}}^{d_h&space;}&space;,\overleftarrow{h_t&space;}&space;\in&space;{\mathbb{R}}^{d_h&space;}"/>はそれぞれ，順方向および逆方向のRNNで求めた時刻ttの隠れ状態ベクトル，<img src="https://latex.codecogs.com/gif.latex?\inline&space;\overleftarrow{{{RNN}}}&space;\left(x,h\right)"/>は入力<img src="https://latex.codecogs.com/gif.latex?\inline&space;x"/>と次時刻の隠れ状態<img src="https://latex.codecogs.com/gif.latex?\inline&space;h"/>から前状態を計算するRNNユニット，<img src="https://latex.codecogs.com/gif.latex?\inline&space;W^{(yh)}&space;\in&space;{\mathbb{R}}^{L\times&space;2d_h&space;}"/>は隠れ状態ベクトルからカテゴリを予測するための行列，<img src="https://latex.codecogs.com/gif.latex?\inline&space;b^{(y)}&space;\in&space;{\mathbb{R}}^L"/>はバイアス項である．また，<img src="https://latex.codecogs.com/gif.latex?\inline&space;\left\lbrack&space;a;b\right\rbrack"/>はベクトル<img src="https://latex.codecogs.com/gif.latex?\inline&space;a"/>と<img src="https://latex.codecogs.com/gif.latex?\inline&space;b"/>の連結を表す。
+>
+> さらに，双方向RNNを多層化して実験せよ．
 
 
   
@@ -629,60 +608,37 @@ confusionchart(YTest,Yhat,'ColumnSummary',"column-normalized","RowSummary","row-
 
 
   
-# 86. 畳み込みニューラルネットワーク (CNN)
+## 86. 畳み込みニューラルネットワーク (CNN)
 
 
-ID番号で表現された単語列<img src="https://latex.codecogs.com/gif.latex?\inline&space;x=\left(x_1&space;,x_2&space;,\dots&space;,x_T&space;\right)"/>がある．ただし，<img src="https://latex.codecogs.com/gif.latex?\inline&space;T"/>は単語列の長さ，<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_t&space;\in&space;{\mathbb{R}}^V"/>は単語のID番号のone-hot表記である（<img src="https://latex.codecogs.com/gif.latex?\inline&space;V"/>は単語の総数である）．畳み込みニューラルネットワーク（CNN: Convolutional Neural Network）を用い，単語列<img src="https://latex.codecogs.com/gif.latex?\inline&space;x"/>からカテゴリ<img src="https://latex.codecogs.com/gif.latex?\inline&space;y"/>を予測するモデルを実装せよ．
+> ID番号で表現された単語列<img src="https://latex.codecogs.com/gif.latex?\inline&space;x=\left(x_1&space;,x_2&space;,\dots&space;,x_T&space;\right)"/>がある．ただし，<img src="https://latex.codecogs.com/gif.latex?\inline&space;T"/>は単語列の長さ，<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_t&space;\in&space;{\mathbb{R}}^V"/>は単語のID番号のone-hot表記である（<img src="https://latex.codecogs.com/gif.latex?\inline&space;V"/>は単語の総数である）．畳み込みニューラルネットワーク（CNN: Convolutional Neural Network）を用い，単語列<img src="https://latex.codecogs.com/gif.latex?\inline&space;x"/>からカテゴリ<img src="https://latex.codecogs.com/gif.latex?\inline&space;y"/>を予測するモデルを実装せよ．
+>
+> ただし，畳み込みニューラルネットワークの構成は以下の通りとする．
+>
+>   -  単語埋め込みの次元数: <img src="https://latex.codecogs.com/gif.latex?\inline&space;d_w"/> 
+>   -  畳み込みのフィルターのサイズ: 3 トークン 
+>   -  畳み込みのストライド: 1 トークン 
+>   -  畳み込みのパディング: あり 
+>   -  畳み込み演算後の各時刻のベクトルの次元数: <img src="https://latex.codecogs.com/gif.latex?\inline&space;d_h"/> 
+>   -  畳み込み演算後に最大値プーリング（max pooling）を適用し，入力文を<img src="https://latex.codecogs.com/gif.latex?\inline&space;d_h"/>次元の隠れベクトルで表現 
+>
+>すなわち，時刻<img src="https://latex.codecogs.com/gif.latex?\inline&space;t"/>の特徴ベクトル<img src="https://latex.codecogs.com/gif.latex?\inline&space;p_t&space;\in&space;{\mathbb{R}}^{d_h&space;}"/>は次式で表される．
+>
+> <img src="https://latex.codecogs.com/gif.latex?p_t&space;=g\left(W^{(px)}&space;\left\lbrack&space;{{emb}}\left(x_{t-1}&space;\right);{{emb}}\left(x_t&space;\right);{{emb}}\left(x_{t+1}&space;\right)\right\rbrack&space;+b^{(p)}&space;\right)"/>
+>
+>ただし，<img src="https://latex.codecogs.com/gif.latex?\inline&space;W^{(px)}&space;\in&space;{\mathbb{R}}^{d_h&space;\times&space;3d_w&space;}&space;,b^{(p)}&space;\in&space;{\mathbb{R}}^{d_h&space;}"/>はCNNのパラメータ，<img src="https://latex.codecogs.com/gif.latex?\inline&space;g"/>は活性化関数（例えば<img src="https://latex.codecogs.com/gif.latex?\inline&space;{{tanh}}"/>やReLUなど），<img src="https://latex.codecogs.com/gif.latex?\inline&space;\left\lbrack&space;a;b;c\right\rbrack"/>はベクトル<img src="https://latex.codecogs.com/gif.latex?\inline&space;a,b,c"/>の連結である．なお，行列<img src="https://latex.codecogs.com/gif.latex?\inline&space;W^{(px)}"/>の列数が<img src="https://latex.codecogs.com/gif.latex?\inline&space;3d_w"/>になるのは，3個のトークンの単語埋め込みを連結したものに対して，線形変換を行うためである．
+>
+>最大値プーリングでは，特徴ベクトルの次元毎に全時刻における最大値を取り，入力文書の特徴ベクトル<img src="https://latex.codecogs.com/gif.latex?\inline&space;c\in&space;{\mathbb{R}}^{d_h&space;}"/>を求める．<img src="https://latex.codecogs.com/gif.latex?\inline&space;c\left\lbrack&space;i\right\rbrack"/>でベクトル<img src="https://latex.codecogs.com/gif.latex?\inline&space;c"/>の<img src="https://latex.codecogs.com/gif.latex?\inline&space;i"/>番目の次元の値を表すことにすると，最大値プーリングは次式で表される．
+>
+> <img src="https://latex.codecogs.com/gif.latex?c\left\lbrack&space;i\right\rbrack&space;=\max_{1\le&space;t\le&space;T}&space;p_t&space;\left\lbrack&space;i\right\rbrack"/>
+>
+>最後に，入力文書の特徴ベクトル<img src="https://latex.codecogs.com/gif.latex?\inline&space;c"/>に行列<img src="https://latex.codecogs.com/gif.latex?\inline&space;W^{(yc)}&space;\in&space;{\mathbb{R}}^{L\times&space;d_h&space;}"/>とバイアス項<img src="https://latex.codecogs.com/gif.latex?\inline&space;b^{(y)}&space;\in&space;{\mathbb{R}}^L"/>による線形変換とソフトマックス関数を適用し，カテゴリ<img src="https://latex.codecogs.com/gif.latex?\inline&space;y"/>を予測する．
+>
+> <img src="https://latex.codecogs.com/gif.latex?y={{softmax}}\left(W^{(yc)}&space;c+b^{(y)}&space;\right)"/>
+>
+> なお，この問題ではモデルの学習を行わず，ランダムに初期化された重み行列で<img src="https://latex.codecogs.com/gif.latex?\inline&space;y"/>を計算するだけでよい．
 
 
-
-
-ただし，畳み込みニューラルネットワークの構成は以下の通りとする．
-
-
-
-   -  単語埋め込みの次元数: <img src="https://latex.codecogs.com/gif.latex?\inline&space;d_w"/> 
-   -  畳み込みのフィルターのサイズ: 3 トークン 
-   -  畳み込みのストライド: 1 トークン 
-   -  畳み込みのパディング: あり 
-   -  畳み込み演算後の各時刻のベクトルの次元数: <img src="https://latex.codecogs.com/gif.latex?\inline&space;d_h"/> 
-   -  畳み込み演算後に最大値プーリング（max pooling）を適用し，入力文を<img src="https://latex.codecogs.com/gif.latex?\inline&space;d_h"/>次元の隠れベクトルで表現 
-
-
-
-すなわち，時刻<img src="https://latex.codecogs.com/gif.latex?\inline&space;t"/>の特徴ベクトル<img src="https://latex.codecogs.com/gif.latex?\inline&space;p_t&space;\in&space;{\mathbb{R}}^{d_h&space;}"/>は次式で表される．
-
-
-
-<img src="https://latex.codecogs.com/gif.latex?p_t&space;=g\left(W^{(px)}&space;\left\lbrack&space;{{emb}}\left(x_{t-1}&space;\right);{{emb}}\left(x_t&space;\right);{{emb}}\left(x_{t+1}&space;\right)\right\rbrack&space;+b^{(p)}&space;\right)"/>
-
-
-
-ただし，<img src="https://latex.codecogs.com/gif.latex?\inline&space;W^{(px)}&space;\in&space;{\mathbb{R}}^{d_h&space;\times&space;3d_w&space;}&space;,b^{(p)}&space;\in&space;{\mathbb{R}}^{d_h&space;}"/>はCNNのパラメータ，<img src="https://latex.codecogs.com/gif.latex?\inline&space;g"/>は活性化関数（例えば<img src="https://latex.codecogs.com/gif.latex?\inline&space;{{tanh}}"/>やReLUなど），<img src="https://latex.codecogs.com/gif.latex?\inline&space;\left\lbrack&space;a;b;c\right\rbrack"/>はベクトル<img src="https://latex.codecogs.com/gif.latex?\inline&space;a,b,c"/>の連結である．なお，行列<img src="https://latex.codecogs.com/gif.latex?\inline&space;W^{(px)}"/>の列数が<img src="https://latex.codecogs.com/gif.latex?\inline&space;3d_w"/>になるのは，3個のトークンの単語埋め込みを連結したものに対して，線形変換を行うためである．
-
-
-
-
-最大値プーリングでは，特徴ベクトルの次元毎に全時刻における最大値を取り，入力文書の特徴ベクトル<img src="https://latex.codecogs.com/gif.latex?\inline&space;c\in&space;{\mathbb{R}}^{d_h&space;}"/>を求める．<img src="https://latex.codecogs.com/gif.latex?\inline&space;c\left\lbrack&space;i\right\rbrack"/>でベクトル<img src="https://latex.codecogs.com/gif.latex?\inline&space;c"/>の$i$番目の次元の値を表すことにすると，最大値プーリングは次式で表される．
-
-
-
-<img src="https://latex.codecogs.com/gif.latex?c\left\lbrack&space;i\right\rbrack&space;=\max_{1\le&space;t\le&space;T}&space;p_t&space;\left\lbrack&space;i\right\rbrack"/>
-
-
-
-最後に，入力文書の特徴ベクトル<img src="https://latex.codecogs.com/gif.latex?\inline&space;c"/>に行列<img src="https://latex.codecogs.com/gif.latex?\inline&space;W^{(yc)}&space;\in&space;{\mathbb{R}}^{L\times&space;d_h&space;}"/>とバイアス項<img src="https://latex.codecogs.com/gif.latex?\inline&space;b^{(y)}&space;\in&space;{\mathbb{R}}^L"/>による線形変換とソフトマックス関数を適用し，カテゴリ<img src="https://latex.codecogs.com/gif.latex?\inline&space;y"/>を予測する．
-
-
-
-<img src="https://latex.codecogs.com/gif.latex?y={{softmax}}\left(W^{(yc)}&space;c+b^{(y)}&space;\right)"/>
-
-
-
-なお，この問題ではモデルの学習を行わず，ランダムに初期化された重み行列で<img src="https://latex.codecogs.com/gif.latex?\inline&space;y"/>を計算するだけでよい．
-
-
-  
 
 
 MATLABでCNNを組むとなると「画像のフリ」をする必要が出てくるわけでして，入力を単語埋め込みから始めていいですかね・・・ 
@@ -758,10 +714,9 @@ layers = [ ...
 
 ```
 
-# 87. 確率的勾配降下法によるCNNの学習
+## 87. 確率的勾配降下法によるCNNの学習
 
-
-確率的勾配降下法（SGD: Stochastic Gradient Descent）を用いて，問題86で構築したモデルを学習せよ．訓練データ上の損失と正解率，評価データ上の損失と正解率を表示しながらモデルを学習し，適当な基準（例えば10エポックなど）で終了させよ．
+> 確率的勾配降下法（SGD: Stochastic Gradient Descent）を用いて，問題86で構築したモデルを学習せよ．訓練データ上の損失と正解率，評価データ上の損失と正解率を表示しながらモデルを学習し，適当な基準（例えば10エポックなど）で終了させよ．
 
 
 
@@ -796,10 +751,10 @@ net = trainNetwork(XTrainE,YTrain,layers,options);
 条件をあれこれ振っても検証精度80%が精一杯．LSTMで単語埋め込みの初期値を指定しない場合と同程度の精度であることを考えると「単語埋め込み層を省いている分だけ最適化ができていない」という解釈になるのでしょうか．
 
 
-# 88. パラメータチューニング
+## 88. パラメータチューニング
 
 
-問題85や問題87のコードを改変し，ニューラルネットワークの形状やハイパーパラメータを調整しながら，高性能なカテゴリ分類器を構築せよ．
+> 問題85や問題87のコードを改変し，ニューラルネットワークの形状やハイパーパラメータを調整しながら，高性能なカテゴリ分類器を構築せよ．
 
 
   
