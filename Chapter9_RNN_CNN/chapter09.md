@@ -1,5 +1,5 @@
 # 第9章: RNN, CNN（80－88）
-# 80. ID番号への変換
+## 80. ID番号への変換
 
 
 > 問題51で構築した学習データ中の単語にユニークなID番号を付与したい．学習データ中で最も頻出する単語に`1`，2番目に頻出する単語に`2`，……といった方法で，学習データ中で2回以上出現する単語にID番号を付与せよ．そして，与えられた単語列に対して，ID番号の列を返す関数を実装せよ．ただし，出現頻度が2回未満の単語のID番号はすべて`0`とせよ．
@@ -235,41 +235,45 @@ XValid  = preprocess(validTbl,enc);
 YValid  = categorical(validTbl.Category);
 ```
 
-# 81. RNNによる予測
+## 81. RNNによる予測
 
 
-ID番号で表現された単語列<img src="https://latex.codecogs.com/gif.latex?\inline&space;x=(x_1&space;,x_2&space;,\dots&space;,x_T&space;)"/>がある．ただし，<img src="https://latex.codecogs.com/gif.latex?\inline&space;T"/>は単語列の長さ，<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_t&space;\in&space;{\mathbb{R}}^V"/>は単語のID番号のone-hot表記である（<img src="https://latex.codecogs.com/gif.latex?\inline&space;V"/>は単語の総数である）．再帰型ニューラルネットワーク（RNN: Recurrent Neural Network）を用い，単語列<img src="https://latex.codecogs.com/gif.latex?\inline&space;x"/>からカテゴリ<img src="https://latex.codecogs.com/gif.latex?\inline&space;y"/>を予測するモデルとして，次式を実装せよ．
+> ID番号で表現された単語列<img src="https://latex.codecogs.com/gif.latex?\inline&space;x=(x_1&space;,x_2&space;,\dots&space;,x_T&space;)"/>がある．ただし，<img src="https://latex.codecogs.com/gif.latex?\inline&space;T"/>は単語列の長さ，<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_t&space;\in&space;{\mathbb{R}}^V"/>は単語のID番号のone-hot表記である（<img src="https://latex.codecogs.com/gif.latex?\inline&space;V"/>は単語の総数である）．再帰型ニューラルネットワーク（RNN: Recurrent Neural Network）を用い，単語列<img src="https://latex.codecogs.com/gif.latex?\inline&space;x"/>からカテゴリ<img src="https://latex.codecogs.com/gif.latex?\inline&space;y"/>を予測するモデルとして，次式を実装せよ．
+
+> <img src="https://latex.codecogs.com/gif.latex?\vec{h_0&space;}&space;=0,"/>
+
+> <img src="https://latex.codecogs.com/gif.latex?\vec{h_t&space;}&space;=\overrightarrow{{{RNN}}}&space;\left({{emb\left(x_t&space;\right),\vec{h_{t-1}&space;}&space;}}\right),"/>
+
+> <img src="https://latex.codecogs.com/gif.latex?y={{softmax}}\left(W^{(yh)}&space;\vec{h_T&space;}&space;+b^{(y)}&space;\right)"/>
+
+> ただし， 
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;{{emb}}\left(x\right)\in&space;{\mathbb{R}}^{d_w&space;}"/> は単語埋め込み（単語のone-hot表記から単語ベクトルに変換する関数），
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;\vec{h_t&space;}&space;\in&space;{\mathbb{R}}^{d_h&space;}"/>は時刻
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;t"/>の隠れ状態ベクトル，
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;\overrightarrow{{{RNN}}}&space;\left(x,h\right)"/>は入力
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;x"/>と前時刻の隠れ状態
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;h"/>から次状態を計算するRNNユニット，
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;W^{(yh)}&space;\in&space;{\mathbb{R}}^{L\times&space;d_h&space;}"/>は隠れ状態ベクトルからカテゴリを予測するための行列，
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;b^{(y)}&space;\in&space;{\mathbb{R}}^L"/>はバイアス項である（
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;d_w&space;,d_h&space;,L"/>はそれぞれ，単語埋め込みの次元数，隠れ状態ベクトルの次元数，ラベル数である）．RNNユニット
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;\overrightarrow{{{RNN}}}&space;\left(x,h\right)"/>には様々な構成が考えられるが，典型例として次式が挙げられる．
+
+> <img src="https://latex.codecogs.com/gif.latex?\overrightarrow{{{RNN}}}&space;\left(x,h\right)=g\left(W^{(hx)}&space;x+W^{(hh)}&space;h+b^{(h)}&space;\right)"/>
+
+> ただし，
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;W^{(hx)}&space;\in&space;{\mathbb{R}}^{d_h&space;\times&space;d_w&space;}"/>，
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;W^{(hh)} \in {\mathbb{R}}^{d_h \times d_h }"/>，
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;b^{(h)} \in {\mathbb{R}}^{d_h }"/>はRNNユニットのパラメータ，
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;g"/>は活性化関数（例えば
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;{{tanh}}"/>やReLUなど）である．
 
 
 
-<img src="https://latex.codecogs.com/gif.latex?\vec{h_0&space;}&space;=0,"/>
 
-
-<img src="https://latex.codecogs.com/gif.latex?\vec{h_t&space;}&space;=\overrightarrow{{{RNN}}}&space;\left({{emb\left(x_t&space;\right),\vec{h_{t-1}&space;}&space;}}\right),"/>
-
-
-<img src="https://latex.codecogs.com/gif.latex?y={{softmax}}\left(W^{(yh)}&space;\vec{h_T&space;}&space;+b^{(y)}&space;\right)"/>
-
-
-
-ただし， <img src="https://latex.codecogs.com/gif.latex?\inline&space;{{emb}}\left(x\right)\in&space;{\mathbb{R}}^{d_w&space;}"/>は単語埋め込み（単語のone-hot表記から単語ベクトルに変換する関数），<img src="https://latex.codecogs.com/gif.latex?\inline&space;\vec{h_t&space;}&space;\in&space;{\mathbb{R}}^{d_h&space;}"/>は時刻<img src="https://latex.codecogs.com/gif.latex?\inline&space;t"/>の隠れ状態ベクトル，<img src="https://latex.codecogs.com/gif.latex?\inline&space;\overrightarrow{{{RNN}}}&space;\left(x,h\right)"/>は入力<img src="https://latex.codecogs.com/gif.latex?\inline&space;x"/>と前時刻の隠れ状態<img src="https://latex.codecogs.com/gif.latex?\inline&space;h"/>から次状態を計算するRNNユニット，<img src="https://latex.codecogs.com/gif.latex?\inline&space;W^{(yh)}&space;\in&space;{\mathbb{R}}^{L\times&space;d_h&space;}"/>は隠れ状態ベクトルからカテゴリを予測するための行列，<img src="https://latex.codecogs.com/gif.latex?\inline&space;b^{(y)}&space;\in&space;{\mathbb{R}}^L"/>はバイアス項である（<img src="https://latex.codecogs.com/gif.latex?\inline&space;d_w&space;,d_h&space;,L"/>はそれぞれ，単語埋め込みの次元数，隠れ状態ベクトルの次元数，ラベル数である）．RNNユニット<img src="https://latex.codecogs.com/gif.latex?\inline&space;\overrightarrow{{{RNN}}}&space;\left(x,h\right)"/>には様々な構成が考えられるが，典型例として次式が挙げられる．
-
-
-
-<img src="https://latex.codecogs.com/gif.latex?\overrightarrow{{{RNN}}}&space;\left(x,h\right)=g\left(W^{(hx)}&space;x+W^{(hh)}&space;h+b^{(h)}&space;\right)"/>
-
-  
-
-
-ただし，<img src="https://latex.codecogs.com/gif.latex?\inline&space;W^{(hx)}&space;\in&space;{\mathbb{R}}^{d_h&space;\times&space;d_w&space;}"/>，$W^{(hh)} \in {\mathbb{R}}^{d_h \times d_h }<img src="https://latex.codecogs.com/gif.latex?\inline&space;，"/>b^{(h)} \in {\mathbb{R}}^{d_h }<img src="https://latex.codecogs.com/gif.latex?\inline&space;はRNNユニットのパラメータ，"/>g$は活性化関数（例えば<img src="https://latex.codecogs.com/gif.latex?\inline&space;{{tanh}}"/>やReLUなど）である．
-
-
-
-
-なお，この問題ではパラメータの学習を行わず，ランダムに初期化されたパラメータで<img src="https://latex.codecogs.com/gif.latex?\inline&space;y"/>を計算するだけでよい．次元数などのハイパーパラメータは，$d_w =300<img src="https://latex.codecogs.com/gif.latex?\inline&space;，"/>d_h =50$など，適当な値に設定せよ（以降の問題でも同様である）．
-
-
-  
+>なお，この問題ではパラメータの学習を行わず，ランダムに初期化されたパラメータで
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;y"/>を計算するだけでよい．次元数などのハイパーパラメータは，
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;d_w = 300"/>
+<img src="https://latex.codecogs.com/gif.latex?\inline&space;d_h=50"/>など，適当な値に設定せよ（以降の問題でも同様である）．
 
 
 ゴメンナサイ．LSTM使っていいっすか？
