@@ -24,7 +24,7 @@ https://nlp100.github.io/ja/ で公開されている言語処理100本ノック
 | [第6章: 機械学習](Chapter6_MachineLearning/Chapter6_MachineLearning.md)　| minoue | in progress |
 | [第7章: 単語ベクトル](Chapter7_Wordembedding/Chapter7.md)　| misataguchi | completed |
 | [第8章: ニューラルネット](Chapter8_NeuralNetwork/chapter08.md)　| tikegami-mw | completed |
-| 第9章: RNN,CNN　| TBD | |
+| [第9章: RNN, CNN](Chapter9_RNN_CNN/chapter09.md | tikegami-mw | in progress |
 | 第10章: 機械翻訳　| TBD | |
 
 - In progress になっているけどやりたいという方もどうぞ issue にてご連絡ください。こうしたら共同作業しやすいなど運用上の提案コメントもお待ちしております。
