@@ -254,21 +254,21 @@ YValid  = categorical(validTbl.Category);
 <img src="https://latex.codecogs.com/gif.latex?\inline&space;b^{(y)}&space;\in&space;{\mathbb{R}}^L"/>はバイアス項である（
 <img src="https://latex.codecogs.com/gif.latex?\inline&space;d_w&space;,d_h&space;,L"/>はそれぞれ，単語埋め込みの次元数，隠れ状態ベクトルの次元数，ラベル数である）．RNNユニット
 <img src="https://latex.codecogs.com/gif.latex?\inline&space;\overrightarrow{{{RNN}}}&space;\left(x,h\right)"/>には様々な構成が考えられるが，典型例として次式が挙げられる．
-
+>
 > <img src="https://latex.codecogs.com/gif.latex?\overrightarrow{{{RNN}}}&space;\left(x,h\right)=g\left(W^{(hx)}&space;x+W^{(hh)}&space;h+b^{(h)}&space;\right)"/>
-
+>
 > ただし，
 <img src="https://latex.codecogs.com/gif.latex?\inline&space;W^{(hx)}&space;\in&space;{\mathbb{R}}^{d_h&space;\times&space;d_w&space;}"/>，
 <img src="https://latex.codecogs.com/gif.latex?\inline&space;W^{(hh)} \in {\mathbb{R}}^{d_h \times d_h }"/>，
 <img src="https://latex.codecogs.com/gif.latex?\inline&space;b^{(h)} \in {\mathbb{R}}^{d_h }"/>はRNNユニットのパラメータ，
 <img src="https://latex.codecogs.com/gif.latex?\inline&space;g"/>は活性化関数（例えば
 <img src="https://latex.codecogs.com/gif.latex?\inline&space;{{tanh}}"/>やReLUなど）である．
-
+>
 >なお，この問題ではパラメータの学習を行わず，ランダムに初期化されたパラメータで
 <img src="https://latex.codecogs.com/gif.latex?\inline&space;y"/>を計算するだけでよい．次元数などのハイパーパラメータは，<img src="https://latex.codecogs.com/gif.latex?\inline&space;d_w=300"/><img src="https://latex.codecogs.com/gif.latex?\inline&space;d_h=50"/>など，適当な値に設定せよ（以降の問題でも同様である）．
 
 
-ゴメンナサイ．LSTM使っていいっすか？
+スミマセン．LSTM使っていいっすか？
 
 
 入力層として`sequenceInputLayer` を設定します．入力するデータは問題80で求めた文書毎の単語IDのシーケンス `wordID `です．この場合には，入力サイズは1とします．続いて，wordEmbeddingLayer ですが，この層は単語のシーケンスから単語ベクトル（単語埋め込み）を学習します．LSTM層では隠れ層の初期値を問題の指示の通りにゼロにしておきます．その後は，通常の全結合層，ソフトマックス層，分類層と続きます．
@@ -519,13 +519,12 @@ confusionchart(YTest,Yhat,'ColumnSummary',"column-normalized","RowSummary","row-
 
 
 > 順方向と逆方向のRNNの両方を用いて入力テキストをエンコードし，モデルを学習せよ．
-
-
+>
 > <img src="https://latex.codecogs.com/gif.latex?{\overleftarrow{h}&space;}_{T+1}&space;=0,"/>
 > <img src="https://latex.codecogs.com/gif.latex?\overleftarrow{h_t&space;}&space;=\overleftarrow{{{RNN}}}&space;\left({{emb}}\left(x_t&space;\right),{\overleftarrow{h}&space;}_{t+1}&space;\right),"/>
-
+>
 > <img src="https://latex.codecogs.com/gif.latex?y={{softmax}}\left(W^{(yh)}&space;\left\lbrack&space;{\overrightarrow{h}&space;}_T&space;;{\overleftarrow{h}&space;}_1&space;\right\rbrack&space;+b^{(y)}&space;\right)"/>
-
+>
 > ただし，<img src="https://latex.codecogs.com/gif.latex?\inline&space;\overrightarrow{h_t&space;}&space;\in&space;{\mathbb{R}}^{d_h&space;}&space;,\overleftarrow{h_t&space;}&space;\in&space;{\mathbb{R}}^{d_h&space;}"/>はそれぞれ，順方向および逆方向のRNNで求めた時刻ttの隠れ状態ベクトル，<img src="https://latex.codecogs.com/gif.latex?\inline&space;\overleftarrow{{{RNN}}}&space;\left(x,h\right)"/>は入力<img src="https://latex.codecogs.com/gif.latex?\inline&space;x"/>と次時刻の隠れ状態<img src="https://latex.codecogs.com/gif.latex?\inline&space;h"/>から前状態を計算するRNNユニット，<img src="https://latex.codecogs.com/gif.latex?\inline&space;W^{(yh)}&space;\in&space;{\mathbb{R}}^{L\times&space;2d_h&space;}"/>は隠れ状態ベクトルからカテゴリを予測するための行列，<img src="https://latex.codecogs.com/gif.latex?\inline&space;b^{(y)}&space;\in&space;{\mathbb{R}}^L"/>はバイアス項である．また，<img src="https://latex.codecogs.com/gif.latex?\inline&space;\left\lbrack&space;a;b\right\rbrack"/>はベクトル<img src="https://latex.codecogs.com/gif.latex?\inline&space;a"/>と<img src="https://latex.codecogs.com/gif.latex?\inline&space;b"/>の連結を表す。
 >
 > さらに，双方向RNNを多層化して実験せよ．
@@ -887,85 +886,4 @@ end
 
 結果的には，どのパラメータをとっても，検証精度90％程度でほとんど変わりませんでした．トホホ・・・
 
-
-  
-  
-  
-
-```matlab:Code
-function wordID = word2ID(enc,words)
-
-% 入力引数のチェック
-arguments
-  enc wordEncoding
-  words (1,:) string
-end
-
-wordID = zeros(size(words)); % 返値を0で初期化しておきます
-
-% 入力単語が入力されたエンコードされているかどうかを確認します．
-lidxWordInEnc = isVocabularyWord(enc,words); 
-
-% Keyに登録されている単語に対して，エンコードされたIDを取得します．
-tmpStr = words(lidxWordInEnc); % 
-tmpID  = word2ind(enc,tmpStr);
-
-% 出力を抽出したIDで置き換えます．（エンコードされていない単語に対しては0のままになります．）
-wordID(lidxWordInEnc)=tmpID;
-
-end
-
-```
-
-  
-
-```matlab:Code
-function [wordID,enc] = preprocess(dataTbl,enc)
-
-str = dataTbl.Title;
-docs = tokenizedDocument(str);       
-docs = addPartOfSpeechDetails(docs);
-docs = removeStopWords(docs);
-% docs = normalizeWords(docs);
-docs = erasePunctuation(docs);
-docs = removeShortWords(docs,2);
-docs = removeLongWords(docs,15);
-
-bows = bagOfWords(docs);
-
-nWordsToEncode = nnz(sum(bows.Counts)>1);
-
-if nargin < 2
-  enc = wordEncoding(docs,'Order','Frequency','MaxNumWords',nWordsToEncode);
-end
-wordID = doc2sequence(enc,docs,"Length",13);
-
-end
-
-```
-
-  
-
-```matlab:Code
-function Xemb = enc2emb(enc,emb,X)
-
-numSamples = size(X,1);    % サンプル数
-numSeq     = size(X{1},2); % X のシーケンス長
-
-Xemb = zeros([emb.Dimension numSeq 1 numSamples]); 
-for kk = 1:numSamples
-  % XをIDから単語に変換しますが，この際にIDが0になっているものは無視します．
-  tmpWords = ind2word(enc, X{kk}(X{kk}>0));
-  
-  % 単語の列を単語ベクトルに変換します．
-  tmpVec = word2vec(emb, tmpWords)';
-  
-  % サンプルによって１シーケンスに含まれる単語の数は異なっているので，
-  % 初めにサンプル数×シーケンス長のゼロ行列を用意しておいて，後から内容を埋めます
-  Xemb(:,1:size(tmpVec,2),:,kk) = tmpVec;
-
-end
-
-end
-```
 
