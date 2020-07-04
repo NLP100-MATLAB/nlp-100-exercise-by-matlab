@@ -241,8 +241,10 @@ YValid  = categorical(validTbl.Category);
 > ID番号で表現された単語列<img src="https://latex.codecogs.com/gif.latex?\inline&space;x=(x_1&space;,x_2&space;,\dots&space;,x_T&space;)"/>がある．ただし，<img src="https://latex.codecogs.com/gif.latex?\inline&space;T"/>は単語列の長さ，<img src="https://latex.codecogs.com/gif.latex?\inline&space;x_t&space;\in&space;{\mathbb{R}}^V"/>は単語のID番号のone-hot表記である（<img src="https://latex.codecogs.com/gif.latex?\inline&space;V"/>は単語の総数である）．再帰型ニューラルネットワーク（RNN: Recurrent Neural Network）を用い，単語列<img src="https://latex.codecogs.com/gif.latex?\inline&space;x"/>からカテゴリ<img src="https://latex.codecogs.com/gif.latex?\inline&space;y"/>を予測するモデルとして，次式を実装せよ．
 >
 > <img src="https://latex.codecogs.com/gif.latex?\vec{h_0&space;}&space;=0,"/>
+
 >
 > <img src="https://latex.codecogs.com/gif.latex?\vec{h_t&space;}&space;=\overrightarrow{{{RNN}}}&space;\left({{emb\left(x_t&space;\right),\vec{h_{t-1}&space;}&space;}}\right),"/>
+
 >
 > <img src="https://latex.codecogs.com/gif.latex?y={{softmax}}\left(W^{(yh)}&space;\vec{h_T&space;}&space;+b^{(y)}&space;\right)"/>
 >
